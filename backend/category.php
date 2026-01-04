@@ -9,11 +9,13 @@ class Category {
         $this->conn = $conn;
     }
 
-    public function getCategoryDetails($type) {
-        $category = $this->conn->prepare("SELECT * FROM products WHERE type=$type");
+    public function getCategory($id) {
+        $category = $this->conn->prepare("SELECT name FROM categories WHERE id=$id");
         $category->execute();
-        return $category->fetchAll();
-
+        $result = $category->get_result();
+        // $row = $result->fetch_all(MYSQLI_ASSOC);
+        // print_r($row);
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
 }

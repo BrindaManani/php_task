@@ -5,24 +5,29 @@ include 'category.php';
 
 class Product extends Category{
 
-   public $conn;
+    public $conn;
     public function __construct($conn){
         $this->conn = $conn;
     }
 
     public function display(){
-        $stmt = $this->conn->prepare("SELECT * FROM products");
+        $stmt = $this->conn->prepare("SELECT id,name,price FROM products");
         $stmt->execute();
-        // $row = $result->fetch_assoc();
-        // print_r($row);
-        return $stmt->fetchAll();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function add($name, $price, $stock){
-        $stmt = $this->conn->prepare("INSERT INTO users (name,price,stock) VALUES (?,?,?)");
-        $stmt->bind_param("sss",$name, $price, $stock);
+    public function getProduct($id){
+        $stmt = $this->conn->prepare("SELECT * FROM products WHERE id=$id");
         $stmt->execute();
-        $this->display();
+        $result = $stmt->get_result();
+        $product = $result->fetch_all(MYSQLI_ASSOC);
+        $c_id = $product[0]['c_id'];
+        $category = parent::getCategory($c_id);
+        return [
+            'product' => $product,
+            'category' => $category
+        ];
     }
 }
 ?>

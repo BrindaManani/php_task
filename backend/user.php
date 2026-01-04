@@ -20,17 +20,19 @@ class User{
 
     public function login($email, $password){
 
-        $stmt = $this->conn->prepare("SELECT password FROM users WHERE email = ?");
+        $stmt = $this->conn->prepare("SELECT id,name,password FROM users WHERE email = ?");
         $stmt->bind_param("s", $email); 
         $stmt->execute();
         $result = $stmt->get_result();
 
         if ($user = $result->fetch_assoc()) {
             if (password_verify($password, $user['password'])) {
-                $_SESSION['id'] = $user['id'];
-                header("Location: dashboard.php");
+                $_SESSION['user'] = $user['name'];
+                $_SESSION['user_id'] = $user['id'];
+                // header("Location: dashboard.php");
+                return true;
             } else {
-                echo "Invalid email or password.";
+                return false;
             }
         } else {
             echo "Invalid email or password.";
