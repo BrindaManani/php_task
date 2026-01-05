@@ -10,7 +10,13 @@ class User{
     }
     
     public function register($name, $email, $password){
-
+        $check = $this->conn->prepare("SELECT Id FROM users WHERE email = '$email'");
+        //$check->bind_param("i",$email);
+        $check->execute();
+        $result = $check->get_result();
+        if($result->num_rows > 0){
+            return true;
+        }
         $passwordHash = password_hash($password, PASSWORD_DEFAULT);
         $stmt = $this->conn->prepare("INSERT INTO users (name,email,password) VALUES (?,?,?)");
         $stmt->bind_param("sss",$_POST['name'], $_POST['email'], $passwordHash);

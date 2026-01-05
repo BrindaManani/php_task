@@ -1,4 +1,6 @@
 <?php
+include '../index.php';
+include '../database.php';
 
 interface PaymentInterface {
     public function pay($amount);
@@ -6,13 +8,19 @@ interface PaymentInterface {
 
 class CreditCardPayment implements PaymentInterface {
     public function pay($amount) {
-        return "Paid using Credit Card.";
+        return "Paid Rs.$amount using Credit Card.";
     }
 }
 
 class PayPalPayment implements PaymentInterface {
     public function pay($amount) {
-        return "Paid using PayPal.";
+        return "Paid $amount using PayPal.";
+    }
+}
+
+class CodPayment implements PaymentInterface {
+    public function pay($amount) {
+        return "Pay $amount on delivery.";
     }
 }
 

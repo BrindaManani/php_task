@@ -24,6 +24,7 @@ class Order {
     }
 
     public function addOrder($product_id, $qty) {
+
         $productStmt = $this->conn->prepare("SELECT price FROM products WHERE id=?");
         $productStmt->bind_param("i", $product_id);
         $productStmt->execute();

@@ -9,12 +9,27 @@ include '../backend/order.php';
 if(isset($_SESSION['singleProduct'])){
     $data = $_SESSION['singleProduct'];
 }
+
 if(isset($_GET['add_to_cart'])){
     $productId = $_GET['product_id'];
     $quantity = isset($_GET['quantity']) ? (int)$_GET['quantity'] : 1;
     if ($quantity < 1) $quantity = 1;
     $cart = new Cart($conn);
     $cart->addToCart($data['product'][0]['Id'], $quantity);
+    if($cart){
+        echo '<div id="success-alert" class="success-message text-center bg-green-200 text-green-800">';
+        echo 'Product added to cart succefully!';
+        echo '</div>';
+
+        echo '<script type="text/javascript">';
+        echo 'setTimeout(function() {';
+        echo '  var alertDiv = document.getElementById("success-alert");';
+        echo '  if (alertDiv) {';
+        echo '    alertDiv.style.display = "none";';
+        echo '  }';
+        echo '}, 2000);';
+        echo '</script>';
+    }
 }
 if(isset($_GET['buy_now'])){
     $productId = $_GET['product_id'];
@@ -33,7 +48,7 @@ if(isset($_GET['buy_now'])){
                 <div class="">
                     <h4 class="mb-3">Product Details</h4>
                     <p>Name: <?= htmlspecialchars($data['product'][0]['Name']) ?></p>
-                    <p>Price: $<?= $data['product'][0]['Name'] ?></p>
+                    <p>Price: Rs.<?= $data['product'][0]['Price'] ?></p>
                     <p>Category: <?= htmlspecialchars($data['category'][0]['name']) ?></p>
                 </div>
                 <div class="flex flex-col gap-2">

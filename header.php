@@ -22,6 +22,9 @@
         <li class="nav-item">
           <a class="nav-link <?= basename($_SERVER['PHP_SELF'])=='orders.php'?'active':'' ?>" href="orders.php">Order</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link <?= basename($_SERVER['PHP_SELF'])=='info.php'?'active':'' ?>" href="info.php">Summery</a>
+        </li>
 
       </ul>
 
@@ -32,7 +35,7 @@
             <p class="navbar-text me-2">Hello, <?= htmlspecialchars($_SESSION['user']); ?></p>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="logout.php">Logout</a>
+            <a class="nav-link" href="../backend/logout.php">Logout</a>
           </li>
         <?php else: ?>
           <li class="nav-item">

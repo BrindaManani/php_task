@@ -21,15 +21,15 @@
 //     throw new \PDOException($e->getMessage(), (int) $e->getCode());
 // }
 
-// $servername = "127.0.0.1";
-// $username = "test1";
-// $password = "u6OHh6oYlAFnul2G5a2t";
-// $dbname = "test1";
+$servername = "127.0.0.1";
+$username = "test1";
+$password = "u6OHh6oYlAFnul2G5a2t";
+$dbname = "test1";
 
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "php_task";
+// $servername = "localhost";
+// $username = "root";
+// $password = "";
+// $dbname = "php_task";
 
 $conn = new mysqli($servername, $username, $password, $dbname, 3306);
 

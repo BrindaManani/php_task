@@ -26,7 +26,7 @@ $orders = $order->display();
                 <?php foreach ($orders as $order): ?>
                     <tr class="p-4 border rounded shadow text-center">
                         <td><?= $order['id'] ?></td>
-                        <td>$<?= $order['total'] ?></td>
+                        <td>Rs. <?= $order['total'] ?></td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>

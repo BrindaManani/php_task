@@ -1,5 +1,4 @@
 <?php
-include '../index.php';
 include '../database.php';  
 
 
@@ -45,6 +44,14 @@ class Cart{
         $stmt = $this->conn->prepare("INSERT INTO carts (p_id, qty, user_id) VALUES (?, ?, ?)");
         $stmt->bind_param("iii", $product_id, $qty, $_SESSION['user_id']);
         $stmt->execute();
+        return true;
+    }
+
+    public function delete_product($id){
+        $stmt = $this->conn->prepare("DELETE FROM carts WHERE p_id = ?;");
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        return true;
     }
 }
 ?>

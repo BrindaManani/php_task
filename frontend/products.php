@@ -22,7 +22,7 @@ if (isset($_GET['product_id'])) {
                         <h5 class="text-lg font-semibold">
                             <?= htmlspecialchars($product['name']) ?>
                         </h5>
-                        <p>$<?= $product['price'] ?></p>
+                        <p>Rs. <?= $product['price'] ?></p>
                         <a href="?product_id=<?= $product['id'] ?>">View</a>
                     </div>
                 <?php endforeach; ?>
